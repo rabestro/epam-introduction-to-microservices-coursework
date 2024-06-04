@@ -18,4 +18,4 @@ Content-Type: audio/mpeg
 GET {{host}}/resources/1
 
 ### Delete the resources with IDs 1 and 2
-DELETE {{host}}/resources?id=1,2
+DELETE {{host}}/resources?ids=1,2

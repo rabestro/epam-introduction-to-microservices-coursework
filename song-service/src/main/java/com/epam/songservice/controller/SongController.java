@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/songs")
@@ -20,9 +21,10 @@ public class SongController {
     }
 
     @PostMapping
-    public ResponseEntity<Song> createSong(@RequestBody Song song) {
-        Song savedSong = songService.save(song);
-        return ResponseEntity.ok(savedSong);
+    public ResponseEntity<Map<String, Integer>> createSong(@RequestBody Song song) {
+        var savedSong = songService.save(song);
+        var responseBody = Map.of("id", savedSong.getId());
+        return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping("/{id}")
@@ -36,8 +38,9 @@ public class SongController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteSongs(@RequestParam List<Integer> ids) {
+    public ResponseEntity<Map<String, List<Integer>>> deleteSongs(@RequestParam List<Integer> ids) {
         songService.deleteByIds(ids);
-        return ResponseEntity.noContent().build();
+        var responseBody = Map.of("ids", ids);
+        return ResponseEntity.ok(responseBody);
     }
 }

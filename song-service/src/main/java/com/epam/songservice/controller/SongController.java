@@ -3,6 +3,7 @@ package com.epam.songservice.controller;
 import com.epam.songservice.model.Song;
 import com.epam.songservice.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class SongController {
     public ResponseEntity<Map<String, Integer>> createSong(@RequestBody Song song) {
         var savedSong = songService.save(song);
         var responseBody = Map.of("id", savedSong.getId());
-        return ResponseEntity.ok(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
     @GetMapping("/{id}")

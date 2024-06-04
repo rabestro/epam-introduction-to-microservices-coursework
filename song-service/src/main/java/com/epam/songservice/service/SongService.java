@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SongService {
@@ -21,8 +22,8 @@ public class SongService {
         return songRepository.save(song);
     }
 
-    public Song findById(Integer id) {
-        return songRepository.findById(id).orElse(null);
+    public Optional<Song> findById(Integer id) {
+        return songRepository.findById(id);
     }
 
     public void deleteByIds(List<Integer> ids) {

@@ -29,12 +29,9 @@ public class SongController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Song> getSong(@PathVariable Integer id) {
-        Song song = songService.findById(id);
-        if (song == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(song);
-        }
+        return songService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping

@@ -1,0 +1,35 @@
+### Create a new song
+# @name song
+
+POST {{host}}/songs
+Content-Type: application/json
+
+{
+  "name": "We are the champions",
+  "artist": "Queen",
+  "album": "News of the world",
+  "length": "2:59",
+  "resourceId": "123",
+  "year": "1977"
+}
+
+?? status == 201
+?? body contains "id"
+
+### Get the song by ID
+GET {{host}}/songs/{{song.id}}
+
+?? status == 200
+?? body id == {{song.id}}
+?? body name == We are the champions
+?? body artist == Queen
+?? body album == News of the world
+?? body length == 2:59
+?? body resourceId == 123
+?? body year == 1977
+
+### Delete the song
+DELETE {{host}}/songs?ids={{song.id}}
+
+?? status == 200
+?? body ids == [{{song.id}}]

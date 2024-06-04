@@ -48,8 +48,9 @@ public class ResourceController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteResources(@RequestParam List<Integer> ids) {
+    public ResponseEntity<Map<String, List<Integer>>> deleteResources(@RequestParam List<Integer> ids) {
         resourceService.deleteByIds(ids);
-        return ResponseEntity.noContent().build();
+        var responseBody = Map.of("ids", ids);
+        return ResponseEntity.ok(responseBody);
     }
 }

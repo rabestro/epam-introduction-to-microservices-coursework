@@ -1,0 +1,21 @@
+@host = http://localhost:8080
+
+### Upload a new resource (Orient6.mp3)
+# The MP3 file is downloaded from site
+# https://sampleswap.org/mp3/song.php?id=181
+
+POST {{host}}/resources
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Orient6.mp3"
+Content-Type: audio/mpeg
+
+< ./Orient6.mp3
+--WebAppBoundary--
+
+### Get the resource with ID 1
+GET {{host}}/resources/1
+
+### Delete the resources with IDs 1 and 2
+DELETE {{host}}/resources?id=1,2

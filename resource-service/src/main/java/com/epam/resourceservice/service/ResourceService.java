@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceService {
@@ -21,8 +22,8 @@ public class ResourceService {
         return resourceRepository.save(resource);
     }
 
-    public Resource findById(Integer id) {
-        return resourceRepository.findById(id).orElse(null);
+    public Optional<Resource> findById(Integer id) {
+        return resourceRepository.findById(id);
     }
 
     public void deleteByIds(List<Integer> ids) {

@@ -1,0 +1,20 @@
+@host = http://localhost:8080
+
+### Create a new song
+POST {{host}}/songs
+Content-Type: application/json
+
+{
+  "name": "We are the champions",
+  "artist": "Queen",
+  "album": "News of the world",
+  "length": "2:59",
+  "resourceId": "123",
+  "year": "1977"
+}
+
+### Get the song with ID 1
+GET {{host}}/songs/1
+
+### Delete the songs with IDs 1 and 2
+DELETE {{host}}/songs?ids=1,2

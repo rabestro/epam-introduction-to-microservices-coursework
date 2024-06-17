@@ -1,5 +1,10 @@
 version: '3'
 services:
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+
   resource-postgres:
     image: postgres:alpine
     environment:
@@ -26,6 +31,7 @@ services:
       - "8080:8080"
     depends_on:
       - resource-postgres
+      - eureka-server
 
   song-service:
     build: ./song-service
@@ -35,3 +41,5 @@ services:
       - "8081:8081"
     depends_on:
       - song-postgres
+      - resource-service
+      - eureka-server
